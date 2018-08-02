@@ -23,7 +23,7 @@ import scala.collection.immutable
 @InternalApi class AsyncDnsCache extends Dns with PeriodicCacheCleanup {
   private val cacheRef = new AtomicReference(new Cache[(String, QueryType), Answer](
     immutable.SortedSet()(expiryEntryOrdering()),
-    immutable.Map(), clock))
+    immutable.Map(), () ⇒ clock))
 
   private val nanoBase = System.nanoTime()
 
